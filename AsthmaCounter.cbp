@@ -31,12 +31,17 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="`wx-config --cflags`" />
 			<Add option="-Wall" />
+			<Add option="-std=c++17" />
+			<Add option="`wx-config-gtk3 --cxxflags`" />
 		</Compiler>
 		<Linker>
-			<Add option="`wx-config --libs`" />
+			<Add option="`wx-config-gtk3 --libs`" />
 		</Linker>
+		<Unit filename="include/cApp.h" />
+		<Unit filename="include/cMain.h" />
+		<Unit filename="src/cApp.cpp" />
+		<Unit filename="src/cMain.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
