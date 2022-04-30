@@ -8,9 +8,13 @@ public:
     cMain();
     ~cMain();
 
-    wxButton *m_btn1 = nullptr;
-    wxTextCtrl *m_txt1 = nullptr;
-    wxListBox *m_list1 = nullptr;
+    wxButton *m_btn1;
+    wxTextCtrl *m_txt1;
+    wxListBox *m_list1;
+
+    void onButtonClicked(wxCommandEvent& evt);
+
+    wxDECLARE_EVENT_TABLE();
 };
 
 #endif // CMAIN_H
