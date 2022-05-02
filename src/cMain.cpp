@@ -8,7 +8,12 @@ wxEND_EVENT_TABLE()
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFaust", wxPoint(30, 30), wxSize(800, 600)) {
     m_menubar = new wxMenuBar;
     m_file = new wxMenu;
+
     m_menubar->Append(m_file, wxT("&File"));
+    m_file->Append(wxID_ANY, wxT("&New"));
+    m_file->Append(wxID_ANY, wxT("&Open"));
+    m_file->Append(wxID_ANY, wxT("&Save"));
+    m_file->AppendSeparator();
     m_file->Append(wxID_EXIT, wxT("&Quit"));
     SetMenuBar(m_menubar);
 

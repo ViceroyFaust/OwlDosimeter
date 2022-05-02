@@ -3,6 +3,7 @@
 
 #include <wx/wx.h>
 
+// The main window of the App
 class cMain : public wxFrame {
 public:
     cMain();
