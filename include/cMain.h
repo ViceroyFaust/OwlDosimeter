@@ -9,12 +9,13 @@ public:
     cMain();
     ~cMain();
 
+    int m_doses;
+
     wxMenuBar *m_menubar;
     wxMenu *m_file;
 
     wxButton *m_btn1;
-    wxTextCtrl *m_txt1;
-    wxListBox *m_list1;
+    wxStaticText *m_text;
 
     void onQuit(wxCommandEvent& evt);
     void onButtonClicked(wxCommandEvent& evt);
