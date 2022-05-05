@@ -30,6 +30,8 @@ void cMain::onQuit(wxCommandEvent& evt) {
 
 void cMain::onButtonClicked(wxCommandEvent &evt) {
     wxPuts(wxT("Button Clicked"));
+    --m_doses;
+    m_text->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
     evt.Skip();
 }
 
