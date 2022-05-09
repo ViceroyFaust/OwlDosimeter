@@ -14,8 +14,13 @@ public:
     wxMenuBar *m_menubar;
     wxMenu *m_file;
 
-    wxButton *m_decButton;
     wxStaticText *m_counterLabel;
+    wxStaticText *m_histLabel;
+
+    wxListBox *m_histList;
+
+    wxButton *m_decButton;
+    wxButton *m_undoButton;
 
     void onQuit(wxCommandEvent& evt);
     void onButtonClicked(wxCommandEvent& evt);
