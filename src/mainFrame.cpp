@@ -1,13 +1,13 @@
-#include "cMain.h"
+#include "mainFrame.h"
 
 #include <string>
 
-wxBEGIN_EVENT_TABLE(cMain, wxFrame)
-    EVT_BUTTON(10001,  cMain::onButtonClicked)
-    EVT_MENU(wxID_EXIT, cMain::onQuit)
+wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
+    EVT_BUTTON(10001,  MainFrame::onButtonClicked)
+    EVT_MENU(wxID_EXIT, MainFrame::onQuit)
 wxEND_EVENT_TABLE()
 
-cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFaust", wxPoint(30, 30), wxSize(800, 600)), m_doses(120) {
+MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFaust", wxPoint(30, 30), wxSize(800, 600)), m_doses(120) {
     m_menubar = new wxMenuBar;
     m_file = new wxMenu;
 
@@ -24,15 +24,15 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFaust", wx
     m_text =  new wxStaticText(this, wxID_ANY, wxString(strMessage), wxPoint(10, 60));
 }
 
-void cMain::onQuit(wxCommandEvent& evt) {
+void MainFrame::onQuit(wxCommandEvent& evt) {
     Close(true);
 }
 
-void cMain::onButtonClicked(wxCommandEvent &evt) {
+void MainFrame::onButtonClicked(wxCommandEvent &evt) {
     wxPuts(wxT("Button Clicked"));
     --m_doses;
     m_text->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
     evt.Skip();
 }
 
-cMain::~cMain() {}
+MainFrame::~MainFrame() {}

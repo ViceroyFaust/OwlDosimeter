@@ -1,13 +1,13 @@
-#ifndef CMAIN_H
-#define CMAIN_H
+#ifndef MAINFRAME_H
+#define MAINFRAME_H
 
 #include <wx/wx.h>
 
 // The main window of the App
-class cMain : public wxFrame {
+class MainFrame : public wxFrame {
 public:
-    cMain();
-    ~cMain();
+    MainFrame();
+    ~MainFrame();
 
     int m_doses;
 
@@ -23,4 +23,4 @@ public:
     wxDECLARE_EVENT_TABLE();
 };
 
-#endif // CMAIN_H
+#endif

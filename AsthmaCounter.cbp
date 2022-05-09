@@ -25,6 +25,7 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -40,10 +41,10 @@
 		<Linker>
 			<Add option="`wx-config-gtk3 --libs`" />
 		</Linker>
-		<Unit filename="include/cApp.h" />
-		<Unit filename="include/cMain.h" />
-		<Unit filename="src/cApp.cpp" />
-		<Unit filename="src/cMain.cpp" />
+		<Unit filename="include/main.h" />
+		<Unit filename="include/mainFrame.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/mainFrame.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
