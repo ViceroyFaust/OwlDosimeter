@@ -14,8 +14,8 @@ public:
     wxMenuBar *m_menubar;
     wxMenu *m_file;
 
-    wxButton *m_btn1;
-    wxStaticText *m_text;
+    wxButton *m_decButton;
+    wxStaticText *m_counterLabel;
 
     void onQuit(wxCommandEvent& evt);
     void onButtonClicked(wxCommandEvent& evt);
