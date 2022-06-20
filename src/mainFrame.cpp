@@ -5,7 +5,7 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_MENU(wxID_EXIT, MainFrame::onQuit)
 wxEND_EVENT_TABLE()
 
-MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFaust", wxPoint(30, 30), wxSize(300, 400)), m_doses(120) {
+MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Dose Counter", wxPoint(30, 30), wxSize(300, 400)), m_doses(120) {
     m_menubar = new wxMenuBar;
     m_file = new wxMenu;
 
@@ -23,7 +23,7 @@ MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFa
     wxString strHistLabel("Recent History:");
     m_histLabel = new wxStaticText(this, wxID_ANY, strHistLabel, wxDefaultPosition);
 
-    m_histList = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+    m_histList = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(400, 200));
 
     m_decButton = new wxButton(this, 10001, "Take Dose", wxDefaultPosition, wxSize(150, 50));
     m_undoButton = new wxButton(this, wxID_ANY, "Undo", wxDefaultPosition, wxSize(150, 50));
@@ -32,9 +32,8 @@ MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Asthma Counter by ViceroyFa
     sizer->Add(m_counterLabel, 0, wxALL, 10);
     sizer->Add(m_histLabel, 0, wxALL, 10);
     sizer->Add(m_histList, 1, wxEXPAND | wxALL, 10);
-    sizer->Add(m_decButton, 1, wxEXPAND | wxALL, 10);
-    sizer->Add(m_undoButton, 1, wxEXPAND | wxALL, 10);
-
+    sizer->Add(m_decButton, 0, wxALIGN_CENTER | wxALL, 10);
+    sizer->Add(m_undoButton, 0, wxALIGN_CENTER | wxALL, 10);
 
     this->SetSizerAndFit(sizer);
 }
