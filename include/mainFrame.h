@@ -3,6 +3,11 @@
 
 #include <wx/wx.h>
 
+enum ButtonId {
+    doseButtonId = wxID_LAST + 1,
+    undoButtonId
+};
+
 // The main window of the App
 class MainFrame : public wxFrame {
 public:
@@ -19,11 +24,11 @@ public:
 
     wxListBox *m_histList;
 
-    wxButton *m_decButton;
+    wxButton *m_doseButton;
     wxButton *m_undoButton;
 
     void onQuit(wxCommandEvent& evt);
-    void onButtonClicked(wxCommandEvent& evt);
+    void onDoseButtonClicked(wxCommandEvent& evt);
 
     wxDECLARE_EVENT_TABLE();
 };
