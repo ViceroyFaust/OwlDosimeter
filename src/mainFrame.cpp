@@ -46,6 +46,9 @@ void MainFrame::onButtonClicked(wxCommandEvent &evt) {
     wxPuts(wxT("Button Clicked"));
     --m_doses;
     m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+    wxDateTime now = wxDateTime::Now();
+    wxString doseDateTime = now.Format("%F %R");
+    m_histList->AppendAndEnsureVisible(doseDateTime);
     evt.Skip();
 }
 
