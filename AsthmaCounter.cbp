@@ -36,10 +36,10 @@
 			<Add option="-Wall" />
 			<Add option="-std=c++17" />
 			<Add option="-Og" />
-			<Add option="`wx-config-gtk3 --cxxflags`" />
+			<Add option="`wx-config --cxxflags`" />
 		</Compiler>
 		<Linker>
-			<Add option="`wx-config-gtk3 --libs`" />
+			<Add option="`wx-config --libs`" />
 		</Linker>
 		<Unit filename="include/main.h" />
 		<Unit filename="include/mainFrame.h" />

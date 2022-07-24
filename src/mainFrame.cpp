@@ -1,8 +1,10 @@
 #include "mainFrame.h"
+#include <wx/textfile.h>
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_BUTTON(doseButtonId,  MainFrame::onDoseButtonClicked)
     EVT_MENU(wxID_EXIT, MainFrame::onQuit)
+    EVT_MENU(wxID_SAVEAS, MainFrame::onSaveAs)
 wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Dose Counter", wxPoint(30, 30), wxSize(300, 400)), m_doses(120) {
@@ -13,6 +15,7 @@ MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Dose Counter", wxPoint(30, 
     m_file->Append(wxID_ANY, wxT("&New"));
     m_file->Append(wxID_ANY, wxT("&Open"));
     m_file->Append(wxID_ANY, wxT("&Save"));
+    m_file->Append(wxID_SAVEAS, wxT("&Save As"));
     m_file->AppendSeparator();
     m_file->Append(wxID_EXIT, wxT("&Quit"));
     SetMenuBar(m_menubar);
@@ -40,6 +43,31 @@ MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Dose Counter", wxPoint(30, 
 
 void MainFrame::onQuit(wxCommandEvent& evt) {
     Close(true);
+}
+
+void MainFrame::onSaveAs(wxCommandEvent& evt) {
+    wxFileDialog* fd = new wxFileDialog
+    (this, "Choose File", "", "DosimeterLog.txt", "Text Files (*.txt)|*.txt", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+
+	// Creates a "open file" dialog
+	if (fd->ShowModal() == wxID_OK) // if the user click "Open" instead of "Cancel"
+	{
+		wxString CurrentDocPath = fd->GetPath();
+		// Sets our current document to the file the user selected
+		wxArrayString list = m_histList->GetStrings();
+        wxTextFile file(CurrentDocPath);
+        file.Create();
+
+        size_t count = list.Count();
+        for( size_t i = 0 ; i < count ; ++i )
+            file.AddLine( list[ i ] );
+
+        file.Write();
+        file.Close();
+	}
+
+	// Clean up after ourselves
+	fd->Destroy();
 }
 
 void MainFrame::onDoseButtonClicked(wxCommandEvent &evt) {
