@@ -10,11 +10,15 @@ enum ButtonId {
 
 // The main window of the App
 class MainFrame : public wxFrame {
+private:
+    void saveDoses();
 public:
     MainFrame();
     ~MainFrame();
 
     int m_doses;
+
+    wxString curDocPath;
 
     wxMenuBar *m_menubar;
     wxMenu *m_file;
@@ -28,6 +32,7 @@ public:
     wxButton *m_undoButton;
 
     void onQuit(wxCommandEvent& evt);
+    void onSave(wxCommandEvent& evt);
     void onSaveAs(wxCommandEvent& evt);
     void onDoseButtonClicked(wxCommandEvent& evt);
 
