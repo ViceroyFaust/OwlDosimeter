@@ -1,9 +1,11 @@
 #include "mainFrame.h"
 #include <wx/textfile.h>
+#include <wx/numdlg.h>
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_BUTTON(doseButtonId,  MainFrame::onDoseButtonClicked)
     EVT_MENU(wxID_EXIT, MainFrame::onQuit)
+    EVT_MENU(wxID_NEW, MainFrame::onNew)
     EVT_MENU(wxID_SAVE, MainFrame::onSave)
     EVT_MENU(wxID_SAVEAS, MainFrame::onSaveAs)
 wxEND_EVENT_TABLE()
@@ -57,6 +59,17 @@ void MainFrame::saveDoses() {
 
 void MainFrame::onQuit(wxCommandEvent& evt) {
     Close(true);
+}
+
+void MainFrame::onNew(wxCommandEvent& evt) {
+    wxNumberEntryDialog* dialog = new wxNumberEntryDialog
+        (this, "Enter Dose Amount", "Doses:", "New Dosimeter", 0, 0, 1000);
+    if (dialog->ShowModal() == wxID_OK) {
+        curDocPath = "";
+        m_doses = dialog->GetValue();
+        m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+        m_histList->Clear();
+    }
 }
 
 void MainFrame::onSave(wxCommandEvent& evt) {

@@ -32,6 +32,7 @@ public:
     wxButton *m_undoButton;
 
     void onQuit(wxCommandEvent& evt);
+    void onNew(wxCommandEvent& evt);
     void onSave(wxCommandEvent& evt);
     void onSaveAs(wxCommandEvent& evt);
     void onDoseButtonClicked(wxCommandEvent& evt);
