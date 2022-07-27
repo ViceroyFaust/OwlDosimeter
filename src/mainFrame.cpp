@@ -5,6 +5,7 @@
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_BUTTON(doseButtonId,  MainFrame::onDoseButtonClicked)
     EVT_MENU(wxID_EXIT, MainFrame::onQuit)
+    EVT_MENU(wxID_OPEN, MainFrame::onOpen)
     EVT_MENU(wxID_NEW, MainFrame::onNew)
     EVT_MENU(wxID_SAVE, MainFrame::onSave)
     EVT_MENU(wxID_SAVEAS, MainFrame::onSaveAs)
@@ -61,6 +62,23 @@ void MainFrame::onQuit(wxCommandEvent& evt) {
     Close(true);
 }
 
+void MainFrame::onOpen(wxCommandEvent& evt) {
+    wxFileDialog* fd = new wxFileDialog
+        (this, "Choose File", "", "", "Text Files (*.txt)|*.txt", wxFD_OPEN);
+    if (fd->ShowModal() == wxID_OK) {
+        m_histList->Clear();
+        wxTextFile file;
+        file.Open(fd->GetPath());
+        wxString str = file.GetFirstLine();
+        str.ToInt(&m_doses);
+        m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+        for (str = file.GetNextLine();!file.Eof(); str = file.GetNextLine()) {
+            m_histList->AppendAndEnsureVisible(str);
+        }
+    }
+    fd->Destroy();
+}
+
 void MainFrame::onNew(wxCommandEvent& evt) {
     wxNumberEntryDialog* dialog = new wxNumberEntryDialog
         (this, "Enter Dose Amount", "Doses:", "New Dosimeter", 0, 0, 1000);
@@ -70,6 +88,7 @@ void MainFrame::onNew(wxCommandEvent& evt) {
         m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
         m_histList->Clear();
     }
+    dialog->Destroy();
 }
 
 void MainFrame::onSave(wxCommandEvent& evt) {
