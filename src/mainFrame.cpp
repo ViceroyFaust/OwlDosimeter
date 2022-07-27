@@ -58,6 +58,10 @@ void MainFrame::saveDoses() {
     file.Close();
 }
 
+void MainFrame::updateCounter() {
+    m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+}
+
 void MainFrame::onQuit(wxCommandEvent& evt) {
     Close(true);
 }
@@ -71,7 +75,7 @@ void MainFrame::onOpen(wxCommandEvent& evt) {
         file.Open(fd->GetPath());
         wxString str = file.GetFirstLine();
         str.ToInt(&m_doses);
-        m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+        updateCounter();
         for (str = file.GetNextLine();!file.Eof(); str = file.GetNextLine()) {
             m_histList->AppendAndEnsureVisible(str);
         }
@@ -85,7 +89,7 @@ void MainFrame::onNew(wxCommandEvent& evt) {
     if (dialog->ShowModal() == wxID_OK) {
         curDocPath = "";
         m_doses = dialog->GetValue();
-        m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+        updateCounter();
         m_histList->Clear();
     }
     dialog->Destroy();
@@ -119,7 +123,7 @@ void MainFrame::onDoseButtonClicked(wxCommandEvent &evt) {
     if (m_doses == 0)
         return;
     --m_doses;
-    m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
+    updateCounter();
     wxDateTime now = wxDateTime::Now();
     wxString doseDateTime = now.Format("%F %R");
     m_histList->AppendAndEnsureVisible(doseDateTime);

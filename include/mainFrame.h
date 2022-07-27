@@ -12,6 +12,7 @@ enum ButtonId {
 class MainFrame : public wxFrame {
 private:
     void saveDoses();
+    void updateCounter();
 public:
     MainFrame();
     ~MainFrame();

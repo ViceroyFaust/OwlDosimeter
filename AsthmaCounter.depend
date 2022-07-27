@@ -1650,8 +1650,10 @@
 1658906058 /home/dfowl/Devel/workspaces/CPP/AsthmaCounter/include/mainFrame.h
 	<wx/wx.h>
 
-1656250022 source:/home/dfowl/Devel/workspaces/CPP/AsthmaCounter/src/mainFrame.cpp
+1658908227 source:/home/dfowl/Devel/workspaces/CPP/AsthmaCounter/src/mainFrame.cpp
 	"mainFrame.h"
+	<wx/textfile.h>
+	<wx/numdlg.h>
 
 1658168295 /usr/include/wx-3.2/wx/wx.h
 	"wx/defs.h"
@@ -4273,4 +4275,24 @@
 1658168295 /usr/include/wx-3.2/wx/osx/mdi.h
 
 1658168295 /usr/include/wx-3.2/wx/qt/mdi.h
+
+1658168295 /usr/include/wx-3.2/wx/textfile.h
+	"wx/defs.h"
+	"wx/textbuf.h"
+	"wx/file.h"
+
+1658168295 /usr/include/wx-3.2/wx/textbuf.h
+	"wx/defs.h"
+	"wx/arrstr.h"
+	"wx/convauto.h"
+	"wx/string.h"
+	"wx/dynarray.h"
+
+1658168295 /usr/include/wx-3.2/wx/numdlg.h
+	"wx/defs.h"
+	"wx/generic/numdlgg.h"
+
+1658168295 /usr/include/wx-3.2/wx/generic/numdlgg.h
+	"wx/defs.h"
+	"wx/dialog.h"
 
