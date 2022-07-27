@@ -116,6 +116,8 @@ void MainFrame::onSaveAs(wxCommandEvent& evt) {
 
 void MainFrame::onDoseButtonClicked(wxCommandEvent &evt) {
     wxPuts(wxT("Button Clicked"));
+    if (m_doses == 0)
+        return;
     --m_doses;
     m_counterLabel->SetLabel(wxString("Doses Left: ").append(wxString::Format("%i", m_doses)));
     wxDateTime now = wxDateTime::Now();
