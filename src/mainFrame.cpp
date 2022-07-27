@@ -3,18 +3,21 @@
 #include <wx/numdlg.h>
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-    EVT_BUTTON(doseButtonId,  MainFrame::onDoseButtonClicked)
     EVT_MENU(wxID_EXIT, MainFrame::onQuit)
     EVT_MENU(wxID_OPEN, MainFrame::onOpen)
     EVT_MENU(wxID_NEW, MainFrame::onNew)
     EVT_MENU(wxID_SAVE, MainFrame::onSave)
     EVT_MENU(wxID_SAVEAS, MainFrame::onSaveAs)
+    EVT_MENU(wxID_UNDO, MainFrame::onUndo)
+    EVT_BUTTON(doseButtonId,  MainFrame::onDoseButtonClicked)
+    EVT_BUTTON(undoButtonId, MainFrame::onUndo)
 wxEND_EVENT_TABLE()
 
-MainFrame::MainFrame() :
-    wxFrame(nullptr, wxID_ANY, "Dose Counter", wxPoint(30, 30), wxSize(300, 400)), m_doses(120), curDocPath("") {
+MainFrame::MainFrame() : wxFrame(nullptr, wxID_ANY, "Dose Counter", wxPoint(30, 30), wxSize(300, 400)),
+        m_doses(0), m_undoHist(0), curDocPath("") {
     m_menubar = new wxMenuBar;
     m_file = new wxMenu;
+    m_edit = new wxMenu;
 
     m_menubar->Append(m_file, wxT("&File"));
     m_file->Append(wxID_NEW, wxT("&New"));
@@ -23,6 +26,9 @@ MainFrame::MainFrame() :
     m_file->Append(wxID_SAVEAS, wxT("&Save As"));
     m_file->AppendSeparator();
     m_file->Append(wxID_EXIT, wxT("&Quit"));
+
+    m_menubar->Append(m_edit, wxT("&Edit"));
+    m_edit->Append(wxID_UNDO, wxT("&Undo"));
     SetMenuBar(m_menubar);
 
     wxString strDoseCounter = wxString("Doses Left: ").append(wxString::Format("%i", m_doses));
@@ -118,15 +124,25 @@ void MainFrame::onSaveAs(wxCommandEvent& evt) {
 	fd->Destroy();
 }
 
+void MainFrame::onUndo(wxCommandEvent& evt) {
+    if (m_undoHist == 0)
+        return;
+    --m_undoHist;
+    ++m_doses;
+    updateCounter();
+    m_histList->Delete(m_histList->GetCount() - 1);
+}
+
 void MainFrame::onDoseButtonClicked(wxCommandEvent &evt) {
     wxPuts(wxT("Button Clicked"));
     if (m_doses == 0)
         return;
-    --m_doses;
-    updateCounter();
     wxDateTime now = wxDateTime::Now();
     wxString doseDateTime = now.Format("%F %R");
-    m_histList->AppendAndEnsureVisible(doseDateTime);
+    m_histList->AppendAndEnsureVisible(wxString::Format("%i: %s", m_doses, doseDateTime));
+    --m_doses;
+    ++m_undoHist;
+    updateCounter();
     evt.Skip();
 }
 
