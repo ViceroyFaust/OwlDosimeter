@@ -80,7 +80,9 @@ void MainFrame::onOpen(wxCommandEvent& evt) {
         wxTextFile file;
         file.Open(fd->GetPath());
         wxString str = file.GetFirstLine();
-        str.ToInt(&m_doses);
+        long count = 0;
+        str.ToLong(&count);
+        m_doses = static_cast<int>(count);
         updateCounter();
         for (str = file.GetNextLine();!file.Eof(); str = file.GetNextLine()) {
             m_histList->AppendAndEnsureVisible(str);
