@@ -140,7 +140,7 @@ void MainFrame::onDoseButtonClicked(wxCommandEvent &evt) {
     if (m_doses == 0)
         return;
     wxDateTime now = wxDateTime::Now();
-    wxString doseDateTime = now.Format("%F %R");
+    wxString doseDateTime = now.Format("%Y-%m-%d %H:%M");
     m_histList->AppendAndEnsureVisible(wxString::Format("%i: %s", m_doses, doseDateTime));
     --m_doses;
     ++m_undoHist;
