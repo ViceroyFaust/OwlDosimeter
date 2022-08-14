@@ -87,6 +87,7 @@ void MainFrame::onOpen(wxCommandEvent& evt) {
         for (str = file.GetNextLine();!file.Eof(); str = file.GetNextLine()) {
             m_histList->AppendAndEnsureVisible(str);
         }
+        SetTitle(wxString("Dose Counter - ") << fd->GetFilename());
     }
     fd->Destroy();
 }
@@ -99,6 +100,7 @@ void MainFrame::onNew(wxCommandEvent& evt) {
         m_doses = dialog->GetValue();
         updateCounter();
         m_histList->Clear();
+        SetTitle("Dose Counter - New Log");
     }
     dialog->Destroy();
 }
@@ -120,6 +122,7 @@ void MainFrame::onSaveAs(wxCommandEvent& evt) {
         // Sets our current document to the file the user selected
 		curDocPath = fd->GetPath();
         saveDoses();
+        SetTitle(wxString("Dose Counter - ") << fd->GetFilename());
 	}
 
 	// Clean up after ourselves
